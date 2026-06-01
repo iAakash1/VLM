@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+
+# Virtual Environments
+venv/
+.env
+.venv/
+
+# Training Outputs
+outputs/
+logs/
+
+# Dataset
+data/raw/
+data/processed/
+data/captions/
+data/splits/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Models
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Temporary
+*.tmp
+*.log

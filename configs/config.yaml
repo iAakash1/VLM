@@ -1,0 +1,69 @@
+# ============================================================
+#  PlantDx -- Central Configuration
+#  All scripts read from this file. Never hardcode paths.
+# ============================================================
+
+project:
+  name: PlantDx
+  version: "1.0"
+  description: "Plant disease detection via Qwen2.5-VL-7B-Instruct"
+
+paths:
+  dataset_root: "C:/Users/Admin/Desktop/VLM/PlantVillage"
+
+  data:
+    raw_uploads: "data/raw/uploads"
+    processed:   "data/processed"
+    captions:    "data/captions"
+    splits:      "data/splits"
+
+  outputs:
+    checkpoints: "outputs/checkpoints"
+    evaluations: "outputs/evaluations"
+    inference:   "outputs/inference"
+    runs:        "outputs/runs"
+
+model:
+  name:  "Qwen/Qwen2.5-VL-7B-Instruct"
+  dtype: "bfloat16"
+
+lora:
+  r:         32
+  alpha:     64
+  dropout:   0.05
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "gate_proj"
+    - "up_proj"
+    - "down_proj"
+
+training:
+  epochs:        3
+  batch_size:    4
+  grad_accum:    4
+  learning_rate: 2.0e-4
+  weight_decay:  0.01
+  warmup_ratio:  0.05
+  max_length:    512
+  save_steps:    200
+  log_steps:     20
+  patience:      3
+  train_split:   0.9
+  seed:          42
+
+inference:
+  max_new_tokens:     160
+  num_beams:          4
+  repetition_penalty: 1.3
+
+evaluation:
+  max_samples:   200
+  clip_model:    "openai/clip-vit-base-patch32"
+  ood_threshold: 0.22
+
+app:
+  ood_enabled: true
+  port:        8501
